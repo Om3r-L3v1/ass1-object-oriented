@@ -19,31 +19,43 @@ public class RationalScalar extends Scalar{
 
     @Override
     public Scalar add(Scalar s) {
-        return null;
+        return s.addRat(this);
     }
 
     @Override
     public Scalar mul(Scalar s) {
-        return null;
+        return s.mulRat(this);
     }
 
     @Override
     public Scalar neg() {
-        return null;
+        return new RationalScalar(-numerator, denominator);
     }
 
     @Override
     public Scalar power(int exponent) {
-        return null;
+        return new RationalScalar((int)Math.pow(numerator,exponent), (int)Math.pow(denominator,exponent));
     }
 
     @Override
     public int sign() {
-        return 0;
+        if(this.numerator == 0)
+            return 0;
+        else if(Math.signum(denominator) == Math.signum(numerator))
+            return 1;
+        else
+            return -1;
     }
 
     @Override
     public boolean equals(Object o) {
+        if (o instanceof RationalScalar) {
+            RationalScalar other = (RationalScalar) o;
+            return numerator/denominator == other.numerator/other.denominator;
+        }else if(o instanceof IntegerScalar){
+            IntegerScalar other = (IntegerScalar) o;
+            return other.getNumber()==numerator/denominator;
+        }
         return false;
     }
 
@@ -62,20 +74,37 @@ public class RationalScalar extends Scalar{
 
     @Override
     protected Scalar mulRat(RationalScalar s) {
-        return null;
+        int den = (this.denominator*s.denominator);
+        int num = (this.numerator*s.numerator);
+        return new RationalScalar(num,den);
     }
 
     @Override
     protected Scalar mulInt(IntegerScalar s) {
-        return null;
+        int num = s.getNumber()*this.numerator;
+        return new RationalScalar(num,denominator);
     }
 
     public RationalScalar reduce(){
-        return null;
+        int gcd = GCD(denominator,numerator);
+        int newNum = numerator/gcd;
+        int newDen = denominator/gcd;
+        if(Math.signum(denominator) == -1){
+            return new RationalScalar(-newNum,-newDen);
+        }
+        return new RationalScalar(newNum,newDen);
     }
-
     @Override
     public String toString() {
-        return null;
+        return numerator+"/"+denominator;
+    }
+
+    private int GCD(int a, int b){
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return Math.abs(a); // To handle negative inputs
     }
 }
