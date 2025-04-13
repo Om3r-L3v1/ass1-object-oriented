@@ -25,32 +25,42 @@ public class IntegerScalar extends Scalar {
 
     @Override
     public Scalar mul(Scalar s) {
-        return null;
+        return s.mulInt(this);
     }
 
     @Override
     public Scalar neg() {
-        return null;
+        return new IntegerScalar(number*(-1));
     }
 
     @Override
     public Scalar power(int exponent) {
-        return null;
+        if (exponent < 1) {
+            throw new IllegalArgumentException("Exponent must be greater than or equal to 1.");
+        }
+        int num = (int) Math.pow(number, exponent);
+        return new IntegerScalar(num);
     }
 
     @Override
     public int sign() {
-        return 0;
+        return (int) Math.signum(number);
     }
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (o instanceof IntegerScalar)
+            return this.number == ((IntegerScalar) o).number;
+        else if (o instanceof RationalScalar)
+            return this.number ==
+                    (double) ((RationalScalar) o).getNumerator()/((RationalScalar) o).getDenominator();
+        else
+            return false;
     }
 
     @Override
     public String toString() {
-        return null;
+        return "" + number;
     }
 
     protected Scalar addInt(IntegerScalar s) {
@@ -65,11 +75,11 @@ public class IntegerScalar extends Scalar {
 
     @Override
     protected Scalar mulRat(RationalScalar s) {
-        return null;
+        return new RationalScalar(number*s.getNumerator(), s.getDenominator());
     }
 
     @Override
     protected Scalar mulInt(IntegerScalar s) {
-        return null;
+        return new IntegerScalar(this.number*s.number);
     }
 }

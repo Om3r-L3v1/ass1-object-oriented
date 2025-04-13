@@ -33,4 +33,8 @@ public class Polynomial {
     public String toString() {
         return null;
     }
+
+    public static Polynomial build(String input) {
+        return null;
+    }
 }

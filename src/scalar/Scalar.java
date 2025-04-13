@@ -13,8 +13,6 @@ public abstract class Scalar {
 
     abstract public int sign();
 
-    abstract public boolean equals(Object o);
-
     abstract protected Scalar addInt(IntegerScalar s);
 
     abstract protected Scalar addRat(RationalScalar s);
