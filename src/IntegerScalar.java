@@ -1,12 +1,26 @@
 import jdk.jshell.spi.ExecutionControl;
 
-public class IntegerScalar implements Scalar {
+public class IntegerScalar extends Scalar {
 
     private int number;
 
+
+    public IntegerScalar(int number){
+        this.number = number;
+    }
+    public IntegerScalar(){
+        this(0);
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public Scalar add(Scalar s) {
-        return null;
+        if(s == null)
+            throw new IllegalArgumentException("scalar should not be null");
+        return s.addInt(this);
     }
 
     @Override
@@ -30,7 +44,32 @@ public class IntegerScalar implements Scalar {
     }
 
     @Override
+    public boolean equals(Object o) {
+        return false;
+    }
+
+    @Override
     public String toString() {
+        return null;
+    }
+
+    protected Scalar addInt(IntegerScalar s) {
+        return new IntegerScalar(number+s.number);
+    }
+
+    @Override
+    protected Scalar addRat(RationalScalar s) {
+        int num = s.getNumerator() + number*s.getDenominator();
+        return new RationalScalar(num, s.getDenominator());
+    }
+
+    @Override
+    protected Scalar mulRat(RationalScalar s) {
+        return null;
+    }
+
+    @Override
+    protected Scalar mulInt(IntegerScalar s) {
         return null;
     }
 }
