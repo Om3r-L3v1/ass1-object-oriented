@@ -1,3 +1,4 @@
+package scalar;
 
 public abstract class Scalar {
 

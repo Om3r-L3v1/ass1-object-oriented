@@ -1,3 +1,6 @@
+import poly.Monomial;
+import scalar.Scalar;
+
 import java.util.Collection;
 
 public class Polynomial {

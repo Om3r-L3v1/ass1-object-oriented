@@ -1,3 +1,7 @@
+package poly;
+
+import scalar.Scalar;
+
 public class Monomial {
 
     private int exponent;

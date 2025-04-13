@@ -1,3 +1,5 @@
+package scalar;
+
 public class RationalScalar extends Scalar{
 
     private int numerator;
