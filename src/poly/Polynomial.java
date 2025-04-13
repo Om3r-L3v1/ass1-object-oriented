@@ -1,4 +1,5 @@
-import poly.Monomial;
+package poly;
+
 import scalar.Scalar;
 
 import java.util.Collection;
