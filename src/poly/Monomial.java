@@ -52,9 +52,16 @@ public class Monomial {
 
     @Override
     public String toString() {
+        if (coefficient.sign() == 0) return "0";
         String output = coefficient.toString();
         if(exponent >= 1){
-            output += "x";
+            if (coefficient.equals(new IntegerScalar(1)))
+                output = "x";
+            else if (coefficient.equals(new IntegerScalar(-1)))
+                output = "-x";
+            else
+                output += "x";
+
             if(exponent > 1)
                 output += "^"+exponent;
         }

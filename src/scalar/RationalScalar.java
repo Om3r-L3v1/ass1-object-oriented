@@ -34,6 +34,8 @@ public class RationalScalar extends Scalar{
 
     @Override
     public Scalar power(int exponent) {
+        if (exponent < 0)
+            throw new IllegalArgumentException("Exponent must be equal to or greater than 0.");
         return new RationalScalar((int)Math.pow(numerator,exponent), (int)Math.pow(denominator,exponent));
     }
 
@@ -96,7 +98,9 @@ public class RationalScalar extends Scalar{
     }
     @Override
     public String toString() {
-        return numerator+"/"+denominator;
+        RationalScalar temp = this.reduce();
+        if (temp.getDenominator() == 1) return ""+temp.numerator;
+        return temp.numerator+"/"+temp.denominator;
     }
 
     private int GCD(int a, int b){

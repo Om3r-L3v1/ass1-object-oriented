@@ -35,8 +35,8 @@ public class IntegerScalar extends Scalar {
 
     @Override
     public Scalar power(int exponent) {
-        if (exponent < 1) {
-            throw new IllegalArgumentException("Exponent must be greater than or equal to 1.");
+        if (exponent < 0) {
+            throw new IllegalArgumentException("Exponent must be equal to or greater than 0.");
         }
         int num = (int) Math.pow(number, exponent);
         return new IntegerScalar(num);
