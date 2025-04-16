@@ -1,7 +1,6 @@
 package poly;
 
 import scalar.IntegerScalar;
-import scalar.RationalScalar;
 import scalar.Scalar;
 
 public class Monomial {
@@ -43,8 +42,7 @@ public class Monomial {
 
     @Override
     public boolean equals(Object o){
-        if (o instanceof Monomial){
-            Monomial m = (Monomial)o;
+        if (o instanceof Monomial m){
             return m.exponent == exponent && m.coefficient.equals(coefficient);
         }
         return false;

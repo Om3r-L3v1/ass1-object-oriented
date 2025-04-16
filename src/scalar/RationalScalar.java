@@ -51,12 +51,11 @@ public class RationalScalar extends Scalar{
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof RationalScalar) {
-            RationalScalar other = (RationalScalar) o;
-            return numerator/denominator == other.numerator/other.denominator;
-        }else if(o instanceof IntegerScalar){
-            IntegerScalar other = (IntegerScalar) o;
-            return other.getNumber()==numerator/denominator;
+        if (o instanceof RationalScalar other) {
+            return (double) this.numerator/this.denominator == (double) other.numerator/other.denominator;
+        }else if(o instanceof IntegerScalar other){
+            boolean ans = other.getNumber() == (double) this.numerator/this.denominator;
+            return ans;
         }
         return false;
     }
